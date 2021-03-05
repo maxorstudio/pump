@@ -1,0 +1,31 @@
+CREATE TABLE IF NOT EXISTS bot_members (
+	`id` INT NOT NULL AUTO_INCREMENT,
+	`chat_id` INT NOT NULL,
+	`name` VARCHAR(50) NOT NULL,
+	`type` INT(1) NOT NULL,
+	`state` VARCHAR(10) NOT NULL,
+	`comment` TEXT NULL,
+	PRIMARY KEY (id)
+);
+
+CREATE TABLE IF NOT EXISTS tickers (
+	`id` INT NOT NULL AUTO_INCREMENT,
+	`coin` VARCHAR(10) NOT NULL,
+	`volume` BIGINT NOT NULL,
+	`stampday` BIGINT NOT NULL,
+	`stamphour` BIGINT NOT NULL,
+	`stamptime` BIGINT NOT NULL,
+	PRIMARY KEY (id)
+);
+
+CREATE TABLE IF NOT EXISTS sheetdata (
+	`id` INT NOT NULL AUTO_INCREMENT,
+	`icon` VARCHAR(255) NOT NULL,
+	`coin` VARCHAR(10) NOT NULL,
+	`volume72` BIGINT NOT NULL,
+	`volume48` BIGINT NOT NULL,
+	`volume24` BIGINT NOT NULL,
+	`volume` BIGINT NOT NULL,
+	`percent` FLOAT NOT NULL,
+	PRIMARY KEY (id)
+);
