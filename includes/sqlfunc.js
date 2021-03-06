@@ -109,3 +109,13 @@ exports.cleanTickersLists = async function (stamp) {
         return 'err';
     }
 }
+
+exports.updateSheetdata = async function (stamp) {
+    try {
+        //
+    }
+    catch (err) {
+        console.error('[err] (updateSheetdata) > ' + err);
+        return 'err';
+    }
+}

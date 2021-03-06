@@ -11,8 +11,13 @@ let saveRUN = false;
 let updateVolumeRUN = false;
 let updateFullRUN = false;
 
-let saveTimer = (1000 * 60) * 5; // save current volume each 5 min
+let saveTimer = (1000 * 60) * 5;
 let saveLast = 0;
+let saveCancel = false;
+
+let updateTimer = (1000 * 60) * 5; 
+let updateLast = 0;
+let updateCancel = false;
 
 // save each ticker volume to database
 async function saveTickersLists() {
@@ -22,15 +27,24 @@ async function saveTickersLists() {
 
         tickersLists = await sqlfunc.getTickersLists();
 
-        if (tickersLists.length <= 0) 
-        throw 'tickers lists empty, can\'t saved';
-
-        for (let i=0; i<tickersLists.length; i++) {
-            await sqlfunc.registerTicker(tickersLists[i], currentStamp);
+        if (tickersLists.length <= 0) {
+            throw 'tickers lists empty, can\'t saved';
         }
 
-        saveLast = currentStamp.minutes;
+        for (let i=0; i<tickersLists.length; i++) {
+            // await sqlfunc.registerTicker(tickersLists[i], currentStamp);
+        }
+
+        let nextUpdate = Number(updateLast) + Number(updateSave);
+        if (currentStamp.minutes > nextUpdate) {
+            if (updateRUN == false) {
+                await updateSheetdata();
+            }
+        }
+
         console.log('[sys] (saveTickersLists) > tickers lists saved');
+
+        saveLast = currentStamp.minutes;
         saveRUN = false;
         return true;
     }
@@ -41,14 +55,19 @@ async function saveTickersLists() {
     }
 }
 
+// update sheetdata
+async function updateSheetdata() {
+    //
+}
+
 // main timer interval
 async function onTimerMain() {
     currentStamp = await mainfunc.getCurrentStamp();
+    
     let nextSave = Number(saveLast) + Number(saveTimer);
-  
     if (currentStamp.minutes > nextSave) {
         if (saveRUN  == false) {
-            // saveTickersLists();
+            saveTickersLists();
         }
     }
 
