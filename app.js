@@ -42,13 +42,13 @@ async function saveTickersLists() {
 }
 
 // main timer interval
-async function OnTimerMain() {
+async function onTimerMain() {
     currentStamp = await mainfunc.getCurrentStamp();
     let nextSave = Number(saveLast) + Number(saveTimer);
   
     if (currentStamp.minutes > nextSave) {
         if (saveRUN  == false) {
-            saveTickersLists();
+            // saveTickersLists();
         }
     }
 
@@ -65,7 +65,7 @@ async function initApp() {
 // entry point
 async function run () {
     await initApp();
-    timerMainProc = setInterval(OnTimerMain, 1000);
+    timerMainProc = setInterval(onTimerMain, 1000);
 }
 
 // start apps

@@ -1,6 +1,7 @@
-const gram = require('node-telegram-bot-api');
+const gram = require('node-telegram-bot-api')
+const config = require('./config.js');
 
-const botToken = "[TELEGRAM_BOT_TOKEN]";
+const botToken = config.bot.token;
 const bot = new gram(botToken, { polling: true });
 
 async function botCommandStart(msg) {

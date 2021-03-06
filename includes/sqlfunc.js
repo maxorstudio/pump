@@ -1,13 +1,13 @@
 const mysql = require('mysql2/promise');
 const fetch = require('node-fetch');
-const { getCurrentStamp } = require('./mainfunc');
+const config = require('./config.js');
 
 const fetchOptions = { method : "Get" };
 const apiTickersLists = "https://api.coingecko.com/api/v3/coins/bitcoin/tickers";
 const apiTickersParams = "?exchange_ids=binance&order=volume_desc&page=";
 
 const sql = mysql.createPool({
-    host: 'localhost',
+    host: config.sql.hostname,
     user: 'maxor',
     password: 'redroot',
     database: 'pump',
